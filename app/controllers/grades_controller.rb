@@ -12,7 +12,7 @@ class GradesController < ApplicationController
   end
   
   def show
-    if !(current_user.grader == true || current_user.admin == true)
+    unless current_user.grader? || current_user.admin?
        redirect_to :controller => 'submissions', :action => 'index'
     end
     
