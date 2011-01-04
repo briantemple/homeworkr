@@ -1,0 +1,6 @@
+<div id="section">
+  <div id="header"><%= @submission.assignment.name %> : due <%= @submission.assignment.due.to_s(:assignment)%></div>
+  <div id="content">
+    <%= render :partial => 'manual_form' %>
+  </div>
+</div>

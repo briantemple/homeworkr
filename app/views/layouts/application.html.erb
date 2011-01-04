@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Homeworkr</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+<% if user_signed_in? %>
+<div style="float:right"><%= link_to('View submissions', submissions_path, :class=>"command") %> or <%= link_to('Log out', destroy_user_session_path, :class=>"command") %></div>
+<% else %>
+<div style="float:right"><%= link_to('Sign in', new_user_session_path, :class=>"command") %> or <%= link_to('Sign up', new_user_registration_path, :class=>"command") %></div>
+<% end %>
+<h1><center>CSCI 1410 -- Fundamentals of computing</center></h1>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+<%= yield %>
+
+</body>
+</html>

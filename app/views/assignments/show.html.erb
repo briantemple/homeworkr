@@ -1,0 +1,12 @@
+<div id="section">
+<% if !current_user.nil? && current_user.admin? %>
+<%= link_to "Edit assignment", edit_assignment_path(@assignment), :class => "action" %>
+<% end %>
+</div>
+
+<div id="section">
+  <div id="header"><%= @assignment.name %> : due <%= @assignment.due.to_s(:assignment)%></div>
+  <div id="content"><%= raw(@assignment.description) %></div>
+  <br/>
+  <a href="/submissions?assignment_id=<%= @assignment.id %>">View my submission</a>
+</div>

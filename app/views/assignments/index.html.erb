@@ -1,0 +1,11 @@
+<div id="section">
+<% @assignments.each do |assignment| %>
+<a href="/assignments/<%= assignment.id %>"><%= assignment.name %></a> : <%= assignment.abstract %><br/>
+<% end %>
+</div>
+
+<div id="section">
+<% if !current_user.nil? && current_user.admin? %>
+<%= link_to "New assignment", new_assignment_path, :class => "action" %>
+<% end %>
+</div>

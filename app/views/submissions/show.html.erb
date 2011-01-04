@@ -1,0 +1,37 @@
+<div id="section">
+  <div id="header"><%= @submission.assignment.name %> : due <%= @submission.assignment.due.to_s(:assignment)%></div>
+  <div id="content">
+    <div id="status">
+      <b>Status:</b>
+        <% if @submission.status == 0 %>Not submitted
+        <% elsif @submission.status == 1 %>Submitted for grading
+        <% elsif @submission.status == 2 %>Graded
+        <% else %>Unknown
+        <% end %>
+    </div>
+    <div id="grading">
+      <b>Grade:</b> <%= @submission.grade %>
+    </div>
+    <div id="requirements">
+      <b>Required files:</b>
+      <ul>
+        <% @submission.contents.each do |content| %>
+          <li>
+            <div>
+              <% if content.attachment.exists? %><a href="<%= content.attachment.url %>"><% end %>
+              <%= content.requirement.name %>
+              <% if content.attachment.exists? %></a><% end %>
+              </div>
+            <tt style="clear:both;"><pre><%= h(content.notes) %></pre></tt>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    
+    <% if @submission.status == 0 %>
+    <div id="submit" style="clear:both;margin:20px 0px 0px 0px;">
+      <a href="/submissions/<%= @submission.id %>/edit">Upload files or submit assignment for grading</a>
+    </div>
+    <% end %>
+  </div>
+</div>

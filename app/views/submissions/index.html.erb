@@ -1,0 +1,17 @@
+<table width="100%" border="1" cellspacing="0">
+<tr><th>Assignment</th><th>Submission Date</th><th>Days late</th><th>Status</th><th>Grade</th></tr>
+<% @submissions.each do |submission| %>
+<tr>
+  <td><a href="/submissions/<%= submission.id %>"><%= submission.assignment.name %></a></td>
+  <td><%= submission.submitted_at %></td>
+  <td><%= submission.days_late %></td>
+  <td><% if submission.status == 0 %>Not submitted
+  <% elsif submission.status == 1 %>Submitted for grading
+  <% elsif submission.status == 2 %>Graded
+  <% else %>Unknown
+  <% end %>
+  </td>
+  <td><%= submission.grade %></td>
+</tr>
+<% end %>
+</table>

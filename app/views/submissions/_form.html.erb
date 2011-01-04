@@ -1,0 +1,16 @@
+<!--
+This form *SHOULD* work, but I could not figure out how to get a content's requirement's name
+using f.fields_for.  Left in code as a reference.
+
+<%= form_for @submission, :html => { :multipart => true } do |f| %>
+  <p>
+  <%= f.label :status, "Submit assignment?" %>
+  <%= f.check_box :status, {}, 1, 0 %>
+  </p>
+  <%= f.fields_for :contents do |builder| %>
+    <%= builder.label :attachment%>
+    <%= builder.file_field :attachment %>
+  <% end %>
+  <p><%= f.submit "Submit" %></p>
+<% end %>
+-->
