@@ -7,7 +7,7 @@ class AssignmentsController < ApplicationController
     if Assignment.exists?(params[:id])
       @assignment = Assignment.find(params[:id])
     else
-      redirect_to assignments_path
+      render_404
     end
   end
   
@@ -19,7 +19,7 @@ class AssignmentsController < ApplicationController
     if Assignment.exists?(params[:id])
       @assignment = Assignment.find(params[:id])
     else
-      redirect_to assignments_path
+      render_404
     end
   end
   

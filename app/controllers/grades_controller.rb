@@ -19,7 +19,7 @@ class GradesController < ApplicationController
     if Submission.exists?(params[:id])
       @submission = Submission.find(params[:id])
     else
-      redirect_to :controller => 'grades', :action => 'index'
+      render_404
     end
   end
 end

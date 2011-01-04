@@ -1,10 +1,12 @@
 class SubmissionsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show]
+
   def index
     # Handle queries
     if !params[:assignment_id].blank?
       if !Assignment.exists?(params[:assignment_id])
-        redirect_to :controller => 'submissions', :action => 'index'
+        render_404
+        return
       end
 
       if Submission.exists?(:assignment_id => params[:assignment_id], :user_id => current_user)
@@ -23,10 +25,10 @@ class SubmissionsController < ApplicationController
     if Submission.exists?(params[:id])
       @submission = Submission.find(params[:id])
       if @submission.user != current_user && !(current_user.grader == true || current_user.admin == true)
-        redirect_to :controller => 'submissions', :action => 'index'
+        redirect_to submissions_path
       end
     else
-      redirect_to :controller => 'submissions', :action => 'index'
+      render_404
     end
   end  
   
@@ -37,7 +39,7 @@ class SubmissionsController < ApplicationController
         redirect_to :controller => 'submissions', :action => 'show', :id => params[:id]
       end
     else
-      redirect_to :controller => 'submissions', :action => 'index'
+      render_404
     end
   end
   
