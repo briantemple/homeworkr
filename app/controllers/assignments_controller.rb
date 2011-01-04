@@ -5,21 +5,21 @@ class AssignmentsController < ApplicationController
   
   def show
     if Assignment.exists?(params[:id])
-        @assignment = Assignment.find(params[:id])
+      @assignment = Assignment.find(params[:id])
     else
-      redirect_to :controller => 'assignments', :action => 'index'
+      redirect_to assignments_path
     end
   end
   
   def edit
     if current_user.nil? || current_user.admin != true
-      redirect_to :controller => 'assignments', :action => 'index'
+      redirect_to assignments_path
     end
     
     if Assignment.exists?(params[:id])
-        @assignment = Assignment.find(params[:id])
+      @assignment = Assignment.find(params[:id])
     else
-      redirect_to :controller => 'assignments', :action => 'index'
+      redirect_to assignments_path
     end
   end
   
@@ -46,6 +46,6 @@ class AssignmentsController < ApplicationController
       flash[:notice] = "Unable to create assignment"
     end
     
-    redirect_to :controller => 'assignments', :action => 'index'
+    redirect_to assignments_path
   end
 end
