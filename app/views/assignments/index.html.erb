@@ -1,8 +1,13 @@
-<div id="section">
+<table width="100%" border="1" cellspacing="0">
+<tr><th>Name</th><th>Abstract</th><th>Due Date</th></tr>
 <% @assignments.each do |assignment| %>
-<a href="/assignments/<%= assignment.id %>"><%= assignment.name %></a> : <%= assignment.abstract %><br/>
+<tr>
+  <td><%= link_to assignment.name, assignment_path(assignment) %></td>
+  <td><%= link_to assignment.abstract, assignment_path(assignment) %></td>
+  <td><%= link_to assignment.due.to_s(:assignment), assignment_path(assignment) %></td>
+</tr>
 <% end %>
-</div>
+</table>
 
 <div id="section">
 <% if !current_user.nil? && current_user.admin? %>
