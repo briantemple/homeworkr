@@ -1,14 +1,12 @@
-* {
-  #b order: 1px solid;
-  #p adding: 0;
-  margin: 0;
-}
-
 body {
   padding: 20px 50px 20px 50px;
   font-family: "segoe ui", "lucida grande", "lucida sans unicode", verdana, sans-serif;
   font-size: 10pt;
   line-height: 150%;
+}
+
+.useractions {
+  float: right;
 }
 
 table {
