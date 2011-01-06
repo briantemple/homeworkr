@@ -11,7 +11,7 @@ class SubmissionsController < ApplicationController
 
       if Submission.exists?(:assignment_id => params[:assignment_id], :user_id => current_user)
         submission = Submission.find_for_assignment_id(params[:assignment_id], current_user)
-        redirect_to :controller => 'submissions', :action => 'show', :id => submission
+        redirect_to submission
       else
          redirect_to :controller => 'submissions', :action => 'new', :assignment_id => params[:assignment_id]
       end
@@ -22,24 +22,16 @@ class SubmissionsController < ApplicationController
   end
   
   def show
-    if Submission.exists?(params[:id])
-      @submission = Submission.find(params[:id])
-      if @submission.user != current_user && !(current_user.grader == true || current_user.admin == true)
-        redirect_to submissions_path
-      end
-    else
-      render_404
+    @submission = Submission.find(params[:id])
+    if @submission.user != current_user && !(current_user.grader == true || current_user.admin == true)
+      redirect_to submissions_path
     end
-  end  
+  end
   
   def edit
-    if Submission.exists?(params[:id])
-      @submission = Submission.find(params[:id])
-      if @submission.status != 0
-        redirect_to :controller => 'submissions', :action => 'show', :id => params[:id]
-      end
-    else
-      render_404
+    @submission = Submission.find(params[:id])
+    if @submission.status != 0
+      redirect_to @submission
     end
   end
   
@@ -58,18 +50,19 @@ class SubmissionsController < ApplicationController
       content.save
     end
     
-    redirect_to :controller => 'submissions', :action => 'show', :id => submission
+    redirect_to submission
   end
   
   def update
     @submission = Submission.find(params[:id])
-    @previous_submission = Submission.find(params[:id])    
-    
+    previous_status = @submission.status
+        
     if @submission.update_attributes(params[:submission])
-      if @submission.status == 1 && @previous_submission.status == 0
+      if @submission.status == 1 && previous_status == 0
         @submission.submitted_at = Time.now
         @submission.save
       end
+      
       flash[:notice] = "Successfully updated submission."
       redirect_to @submission
     else

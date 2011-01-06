@@ -4,22 +4,14 @@ class AssignmentsController < ApplicationController
   end
   
   def show
-    if Assignment.exists?(params[:id])
-      @assignment = Assignment.find(params[:id])
-    else
-      render_404
-    end
+    @assignment = Assignment.find(params[:id])
   end
   
   def edit
-    if current_user.nil? || current_user.admin != true
+    if current_user.nil? || !current_user.admin?
       redirect_to assignments_path
-    end
-    
-    if Assignment.exists?(params[:id])
-      @assignment = Assignment.find(params[:id])
     else
-      render_404
+      @assignment = Assignment.find(params[:id])
     end
   end
   

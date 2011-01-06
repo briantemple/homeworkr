@@ -2,24 +2,18 @@ class GradesController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-    if !(current_user.grader == true || current_user.admin == true)
-       redirect_to :controller => 'submissions', :action => 'index'
+    unless current_user.grader? || current_user.admin?
+      render_401
     end
     
-    if Submission.exists?(:status => 1)
-      @submissions = Submission.where(:status => 1).order("updated_at ASC")
-    end
+    @submissions = Submission.where(:status => 1).order("updated_at ASC")
   end
   
   def show
     unless current_user.grader? || current_user.admin?
-       redirect_to :controller => 'submissions', :action => 'index'
+       render_401
     end
     
-    if Submission.exists?(params[:id])
-      @submission = Submission.find(params[:id])
-    else
-      render_404
-    end
+    @submission = Submission.find(params[:id])
   end
 end
