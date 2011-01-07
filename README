@@ -2,6 +2,25 @@
 
 Homeworkr is a simple rails app to handle assignment submission and grading.
 
+== Installation
+
+* Install Homeworkr gem dependencies
+bundle install
+
+* Create the database using the command
+rake db:schema:load RAILS_ENV=production
+
+* Populate an administrator user
+rake db:fixtures:load RAILS_ENV=production
+
+* Start the server
+rails s --environment=production
+
+* Log in and create assignments
+http://localhost:3000/assignments
+login : administrator
+password : administrator
+
 == Contact
 
 Project contact: Brian Temple <brian@briantemple.com>
