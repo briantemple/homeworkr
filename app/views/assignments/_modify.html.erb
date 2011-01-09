@@ -1,4 +1,4 @@
-<%= simple_form_for @assignment , :html => { :multipart => true } do |f| %>
+<%= simple_form_for [@course, @assignment], :html => { :multipart => true } do |f| %>
   <%= f.input :name %>
   <%= f.input :due %>
   <%= f.input :abstract %>

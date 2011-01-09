@@ -2,15 +2,15 @@
 <tr><th>Name</th><th>Abstract</th><th>Due Date</th></tr>
 <% @assignments.each do |assignment| %>
 <tr>
-  <td><%= link_to assignment.name, assignment_path(assignment) %></td>
-  <td><%= link_to assignment.abstract, assignment_path(assignment) %></td>
-  <td><%= link_to assignment.due.to_s(:assignment), assignment_path(assignment) %></td>
+  <td><%= link_to assignment.name, course_assignment_path(@course.id, assignment.id) %></td>
+  <td><%= link_to assignment.abstract, course_assignment_path(@course.id, assignment.id) %></td>
+  <td><%= link_to assignment.due.to_s(:assignment), course_assignment_path(@course.id, assignment.id) %></td>
 </tr>
 <% end %>
 </table>
 
 <div id="section">
 <% if !current_user.nil? && current_user.admin? %>
-<%= link_to "New assignment", new_assignment_path, :class => "command" %>
+<%= link_to "New assignment", new_course_assignment_path(@course.id), :class => "command" %>
 <% end %>
 </div>

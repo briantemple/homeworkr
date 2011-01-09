@@ -6,6 +6,11 @@
   <p><%= f.label :username %><br />
   <%= f.text_field :username %></p>
 
+  <p><%= f.label "Course" %><br />
+  <%= @courses = Course.all
+     collection_select(:user, :course_id, @courses, :id, :name)
+  %></p>
+
   <p><%= f.label :email %><br />
   <%= f.text_field :email %></p>
 

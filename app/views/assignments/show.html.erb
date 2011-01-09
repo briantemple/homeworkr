@@ -1,6 +1,6 @@
 <div id="section">
 <% if !current_user.nil? && current_user.admin? %>
-<%= link_to "Edit assignment", edit_assignment_path(@assignment), :class => "action" %>
+<%= link_to "Edit assignment", edit_course_assignment_path(@course.id, @assignment.id), :class => "action" %>
 <% end %>
 </div>
 

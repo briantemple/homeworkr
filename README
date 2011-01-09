@@ -19,8 +19,8 @@ rake db:seed RAILS_ENV=production
 * Start the server
 rails s --environment=production
 
-* Log in and create assignments
-http://localhost:3000/assignments
+* Log in and create courses and assignments
+http://localhost:3000
 
 == Contact
 

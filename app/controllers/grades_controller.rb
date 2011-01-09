@@ -1,19 +1,12 @@
 class GradesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :ensure_grader_or_admin!
   
-  def index
-    unless current_user.grader? || current_user.admin?
-      render_401
-    end
-    
+  def index    
     @submissions = Submission.where(:status => 1).order("updated_at ASC")
   end
   
-  def show
-    unless current_user.grader? || current_user.admin?
-       render_401
-    end
-    
+  def show    
     @submission = Submission.find(params[:id])
   end
 end

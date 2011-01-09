@@ -14,13 +14,15 @@ Homeworkr::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  resources :assignments
   resources :submissions
   resources :grades
+  resources :courses do
+    resources :assignments
+  end
 
   #
   # Required for devise
-  root :to => "home#index"
+  root :to => "courses#index"
 
   devise_scope :user do
     get "/sign_in" => "devise/sessions#new"

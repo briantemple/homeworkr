@@ -1,0 +1,13 @@
+<% unless @courses.empty? %>
+<ul>
+<% @courses.each do |course| %>
+<li><%= link_to course.name,  course_path(course) %>
+<% end %>
+</ul>
+<% else %>
+No courses exist.
+<% end %>
+
+<% unless current_user.nil? || !current_user.admin? %>
+<%= link_to "New course", new_course_path, :class => "command" %>
+<% end %>
