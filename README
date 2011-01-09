@@ -10,16 +10,17 @@ bundle install
 * Create the database using the command
 rake db:schema:load RAILS_ENV=production
 
-* Populate an administrator user
-rake db:fixtures:load RAILS_ENV=production
+* Define an administrator user
+Modify the db/seeds.rb file and change at least the email and password
+
+* Add the administrator user to the database
+rake db:seed RAILS_ENV=production
 
 * Start the server
 rails s --environment=production
 
-* Log in and create assignments
-http://localhost:3000/assignments
-login : administrator
-password : administrator
+* Log in and create your courses, then create assignments
+http://localhost:3000/courses
 
 == Contact
 

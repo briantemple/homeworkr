@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ActiveRecord::Base  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable, :timeoutable and :oauthable
   devise :database_authenticatable, :registerable,
@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
    attr_accessor :login
          
   # Setup accessible (or protected) attributes for your model : login is a virtual attribute
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :login
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :login, :admin, :grader
   
   def self.find_for_database_authentication(conditions)
     login = conditions.delete(:login)

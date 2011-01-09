@@ -1,6 +1,0 @@
-administrator:
-  email: administrator
-  username: administrator
-  encrypted_password: $2a$10$b7O0sQhAg85xHv/ud7vTo.nC17MDF8XeisDYbkQEqLvmgmQsEBOJe
-  password_salt: $2a$10$b7O0sQhAg85xHv/ud7vTo.
-  admin: 1
