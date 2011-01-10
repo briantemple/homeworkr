@@ -30,7 +30,7 @@
     
     <% if @submission.status == 0 %>
     <div id="submit" style="clear:both;margin:20px 0px 0px 0px;">
-      <a href="/submissions/<%= @submission.id %>/edit">Upload files or submit assignment for grading</a>
+      <a class="command" href="/submissions/<%= @submission.id %>/edit">Upload files or submit assignment for grading</a>
     </div>
     <% end %>
   </div>
