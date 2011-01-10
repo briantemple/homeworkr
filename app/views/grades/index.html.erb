@@ -3,7 +3,7 @@
 <tr><th>Assignment</th><th>Student</th><th>Submission Date</th><th>Days late</th></tr>
 <% @submissions.each do |submission| %>
 <tr>
-  <td><a href="/grades/<%= submission.id %>"><%= submission.assignment.name %></a></td>
+  <td><%= link_to submission.assignment.name, course_grade_path(@course_id, submission.id) %></td>
   <td><%= submission.user.email %></td>
   <td><%= submission.submitted_at %></td>
   <td><%= submission.days_late %></td>

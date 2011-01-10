@@ -15,9 +15,9 @@ Homeworkr::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :submissions
-  resources :grades
   resources :courses do
     resources :assignments
+    resources :grades
   end
 
   #
