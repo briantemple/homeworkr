@@ -1,1 +1,5 @@
 <div id="content"><%= raw(@course.homepage) %></div>
+
+<% unless current_user.nil? || !current_user.admin? %>
+<%= link_to "Show assignments", course_assignments_path(@course), :class => "command" %>
+<% end %>
