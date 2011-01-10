@@ -1,24 +1,41 @@
 class SubmissionsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show]
+  before_filter :authenticate_user!
 
   def index
     # Handle queries
-    if !params[:assignment_id].blank?
-      if !Assignment.exists?(params[:assignment_id])
-        render_404
-        return
-      end
-
-      if Submission.exists?(:assignment_id => params[:assignment_id], :user_id => current_user)
-        submission = Submission.find_for_assignment_id(params[:assignment_id], current_user)
-        redirect_to submission
-      else
-         redirect_to :controller => 'submissions', :action => 'new', :assignment_id => params[:assignment_id]
-      end
-    else
-      @assignments = Assignment.where(:user_id => current_user)
-      @submissions = Submission.where(:user_id => current_user)
+    unless params[:assignment_id].blank?
+      handle_assignment_query(params)
+      return
     end
+    
+    unless params[:user_id].blank?
+      handle_user_query(params)
+      return
+    end
+    
+    @assignments = Assignment.where(:user_id => current_user)
+    @submissions = Submission.where(:user_id => current_user)
+  end
+  
+  def handle_assignment_query(params)
+    if !Assignment.exists?(params[:assignment_id])
+      render_404
+      return
+    end
+
+    if Submission.exists?(:assignment_id => params[:assignment_id], :user_id => current_user)
+      submission = Submission.find_for_assignment_id(params[:assignment_id], current_user)
+      redirect_to submission
+    else
+       redirect_to :controller => 'submissions', :action => 'new', :assignment_id => params[:assignment_id]
+    end
+  end
+  
+  def handle_user_query(params)
+    ensure_grader_or_admin!
+    
+    @assignments = Assignment.where(:user_id => params[:user_id])
+    @submissions = Submission.where(:user_id => params[:user_id])
   end
   
   def show
