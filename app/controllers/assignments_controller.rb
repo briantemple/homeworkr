@@ -14,7 +14,7 @@ class AssignmentsController < ApplicationController
   
   def edit
     if current_user.nil? || !current_user.admin?
-      redirect_to assignments_path
+      redirect_to course_assignments_path
     else
       @assignment = Assignment.find(params[:id])
       @course = Course.find(params[:course_id])
@@ -26,7 +26,7 @@ class AssignmentsController < ApplicationController
 
     if @assignment.update_attributes(params[:assignment])
       flash[:notice] = "Successfully updated assignment."
-      redirect_to @assignment
+      redirect_to course_assignment_path(params[:course_id], @assignment.id)
     else
       render :action => 'edit'
     end
