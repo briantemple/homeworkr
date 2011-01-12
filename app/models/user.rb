@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   
   def self.find_for_database_authentication(conditions)
     login = conditions.delete(:login)
-    where(conditions).where(["username = :value OR email = :value", { :value => login }]).first
+    where(conditions).where(["LOWER(username) = LOWER(:value) OR LOWER(email) = LOWER(:value)", { :value => login.strip }]).first
   end
   
   protected
