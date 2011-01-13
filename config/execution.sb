@@ -1,0 +1,16 @@
+;;
+;; submitted code sandbox profile
+;;
+
+(version 1)
+(deny default)
+(debug deny)
+
+(allow file-read*)
+(allow file-write*
+  (subpath "EXECUTION_DIRECTORY")
+)
+
+(allow process*)
+(allow job-creation)
+(allow sysctl-read)

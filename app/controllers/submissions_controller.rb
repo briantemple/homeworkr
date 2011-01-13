@@ -78,6 +78,12 @@ class SubmissionsController < ApplicationController
       if @submission.status == 1 && previous_status == 0
         @submission.submitted_at = Time.now
         @submission.save
+        
+        # Execute if compiled assignment
+        if @submission.assignment.compiled
+          # If needed, move to delayed_job by calling Delayed::Job.enqueue(SubmissionExecutionJob.new(@submission.id))
+          SubmissionExecutionJob.new(@submission.id).perform
+        end
       end
       
       flash[:notice] = "Successfully updated submission."

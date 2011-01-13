@@ -22,6 +22,10 @@ p {
   padding-top: 10px;
 }
 
+tt.output {
+  font-size: 10px;
+}
+
 #section {
   clear: both;
   padding: 20px 0px 0px 0px;

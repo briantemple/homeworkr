@@ -1,9 +1,47 @@
 <div id="section">
   <div id="header"><%= @assignment.name %> : due <%= @assignment.due.to_s(:assignment)%></div>
   <div id="content"><%= raw(@assignment.description) %></div>
-  <br/>
-  <a class="command" href="/submissions?assignment_id=<%= @assignment.id %>">View my submission</a>
 </div>
+
+<div id="section">
+  <div id="header">Files to submit</div>
+  <div id="content">
+	<% if @assignment.requirements.empty? %>
+	None
+	<% else %>
+		<ul>
+		  <% @assignment.requirements.each do |requirement| %>
+		    <li><%= requirement.name %></li>
+		  <% end %>
+		 </ul>
+	  </div>
+    <% end %>
+</div>
+
+<div id="section">
+  <div id="header">Provided files</div>
+  <div id="content">
+	<% if @assignment.assets.empty? %>
+	None
+	<% else %>
+		<ul>
+		  <% @assignment.assets.each do |asset| %>
+		    <% if asset.script == 0 %>
+		  	  <% if asset.attachment.exists? %><a href="<%= asset.attachment.url %>"><% end %>
+                <li><%= asset.name %></li>
+              <% if asset.attachment.exists? %></a><% end %>
+	        <% end %>
+		  <% end %>
+		 </ul>
+	<% end %>
+  </div>
+  <br/>
+</div>
+
+<p>
+<a class="command" href="/submissions?assignment_id=<%= @assignment.id %>">View my submission</a>
+</p>
+
 <% if !current_user.nil? && current_user.admin? %>
 <div>
 <%= link_to "Edit assignment", edit_course_assignment_path(@course.id, @assignment.id), :class => "command" %>

@@ -3,9 +3,24 @@
   <%= f.input :due %>
   <%= f.input :abstract %>
   <%= f.input :description, :as => :text %>
-  <%= f.fields_for :requirements do |r| %>
-    <%= render 'requirement_fields', :f => r %>
-  <% end %>
-  <div class="add"><%= link_to_add_fields "Add required file", f, :requirements %></div>
+  <%= f.label "Compile/Run" %>
+  <%= f.collection_radio :compiled, [[true, 'Yes'] ,[false, 'No']], :first, :last, :label => "Compile and run this assignment" %>
+
+
+  <div class="requirements">
+	<h4>Files students submit</h4>
+	  <%= f.fields_for :requirements do |r| %>
+	    <%= render 'requirement_fields', :f => r %>
+	  <% end %>
+	  <div class="add"><%= link_to_add_fields "Add file", f, :requirements %></div>
+  </div>
+
+  <div class="assets">
+	<h4>Files provided for students to use</h4>
+	  <%= f.fields_for :assets do |a| %>
+	    <%= render 'asset_fields', :f => a %>
+	  <% end %>
+	  <div class="add"><%= link_to_add_fields "Add asset", f, :assets %></div>
+  </div>
   <%= f.button :submit %>
 <% end %>

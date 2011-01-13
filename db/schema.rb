@@ -10,7 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110107231643) do
+ActiveRecord::Schema.define(:version => 20110112023011) do
+
+  create_table "assets", :force => true do |t|
+    t.integer  "assignment_id"
+    t.string   "name"
+    t.integer  "script",                  :default => 0
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "assignments", :force => true do |t|
     t.string   "name"
@@ -20,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20110107231643) do
     t.datetime "updated_at"
     t.string   "description"
     t.integer  "course_id"
+    t.boolean  "compiled",    :default => false
   end
 
   create_table "contents", :force => true do |t|
@@ -50,13 +62,15 @@ ActiveRecord::Schema.define(:version => 20110107231643) do
 
   create_table "submissions", :force => true do |t|
     t.integer  "assignment_id"
-    t.integer  "status",        :default => 0
+    t.integer  "status",             :default => 0
     t.string   "notes"
     t.string   "grade"
     t.datetime "submitted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id",                      :null => false
+    t.integer  "user_id",                           :null => false
+    t.text     "compilation_output"
+    t.text     "execution_output"
   end
 
   create_table "users", :force => true do |t|

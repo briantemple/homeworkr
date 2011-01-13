@@ -1,1 +1,25 @@
  <%= render :partial => 'manual_form' %>
+
+ <% if @submission.assignment.compiled %>
+   <div id="section">
+	  <div id="header">Compilation output</div>
+	  <div id="content">
+		<% if @submission.compilation_output.empty? %>
+		None
+		<% else %>
+         <tt class="output"><pre><%= raw(@submission.compilation_output) %></pre></tt>
+       <% end %>
+	  </div>
+	</div>
+	
+   <div id="section">
+	  <div id="header">Execution output</div>
+	  <div id="content">
+		<% if @submission.execution_output.empty? %>
+		None
+		<% else %>
+		  <tt class="output"><pre><%= raw(@submission.execution_output) %></pre></tt>
+		<% end %>
+	  </div>
+	</div>
+ <% end %>

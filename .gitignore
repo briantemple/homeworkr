@@ -3,3 +3,5 @@ db/*.sqlite3
 log/*.log
 tmp/**/*
 public/system/attachments/**/*
+public/system/execution/**/*
+public/system/assets/**/*

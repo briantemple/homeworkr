@@ -1,0 +1,6 @@
+<div class="fields">
+<%= f.input :name, :label => "Name" %>
+<%= f.input :attachment, :label => "File" %>
+<%= f.input :script, :collection => Asset::Script_types, :label => "Type", :default => 0 %>
+<div class="remove"><%= link_to_remove_fields "Remove asset", f %></div>
+</div>
