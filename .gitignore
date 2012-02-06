@@ -5,3 +5,4 @@ tmp/**/*
 public/system/attachments/**/*
 public/system/execution/**/*
 public/system/assets/**/*
+public/courses/**/*

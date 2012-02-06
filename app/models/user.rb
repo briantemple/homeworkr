@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   belongs_to :course
+  has_many :submissions
   
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable, :timeoutable and :oauthable
@@ -16,6 +17,15 @@ class User < ActiveRecord::Base
   def self.find_for_database_authentication(conditions)
     login = conditions.delete(:login)
     where(conditions).where(["LOWER(username) = LOWER(:value) OR LOWER(email) = LOWER(:value)", { :value => login.strip }]).first
+  end
+  
+  def get_submission_for_assignment(assignment_number)
+    self.submissions.each do |submission|
+      if submission.assignment.id == assignment_number
+        return submission
+      end
+    end
+    nil
   end
   
   protected

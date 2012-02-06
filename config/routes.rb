@@ -18,6 +18,7 @@ Homeworkr::Application.routes.draw do
   resources :courses do
     resources :assignments
     resources :grades
+    resources :students
   end
 
   #

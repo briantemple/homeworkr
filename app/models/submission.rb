@@ -21,4 +21,15 @@ class Submission < ActiveRecord::Base
     days_late = days_late.ceil.to_i
     days_late.to_s
   end
+  
+  def grade_modifier
+    return "" if self.submitted_at.nil?
+    
+    days_late = (self.submitted_at - self.assignment.due)/60/60/24
+
+    return "" if days_late < 0
+
+    days_late = days_late.ceil.to_i
+    "-#{days_late.to_s}"
+  end
 end

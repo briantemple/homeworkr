@@ -1,0 +1,25 @@
+<table width="100%" border="1" cellspacing="0">
+  <tr>
+	<th>Name</th>
+    <% @assignments.each do |assignment| %>
+      <th><%= assignment.name %></th>
+    <% end %>
+  </tr>
+
+  <% @students.each do |student| %>
+  <tr>
+    <td><%= student.email %></td>
+    <% @assignments.each do |assignment| %>
+      <% submission = student.get_submission_for_assignment(assignment.id) %>
+
+      <% if submission.nil? %>
+        <td style="background:red;">&nbsp;</td>
+      <% elsif submission.grade.blank? %>
+        <td style="background:yellow;">NS</td>
+      <% else %>
+        <td><a href="/courses/<%= submission.assignment.course.id %>/grades/<%= submission.id%>"><%= submission.grade %></a> <%= submission.grade_modifier %> </td>
+      <% end %>	
+    <% end %>
+  </tr>
+  <% end %>
+</table>
